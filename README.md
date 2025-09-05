@@ -66,15 +66,6 @@ I’m actively seeking **internship opportunities**, **collaborations**, and **o
 
 ---
 
-## 🖼️ Project Screenshots
-
-| Landing Page       | Menu Page          | Cart & Checkout    |
-| ------------------ | ------------------ | ------------------ |
-| *(Add Screenshot)* | *(Add Screenshot)* | *(Add Screenshot)* |
-
-> I can help you **design attractive mockups** if you'd like screenshots for the README.
-
----
 
 ## 🛠️ Getting Started
 
@@ -152,7 +143,3 @@ If you're building something cool or know a company looking for passionate devel
 * **GitHub:** [https://github.com/UjjwalKharkwal](https://github.com/UjjwalKharkwal)
 
 ---
-
-
-Do you want me to make a **pro-level stylish README** for Dois Bros Café with **badges + visuals + GIF demo**?
-It’ll make your project stand out for internships and LinkedIn. Should I?
