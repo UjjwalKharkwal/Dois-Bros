@@ -32,43 +32,41 @@ const PlaceOrder = () => {
     }
 
     const placeOrder = async (e) => {
-        e.preventDefault()
-        let orderItems = [];
-        food_list.map(((item) => {
-            if (cartItems[item._id] > 0) {
-                let itemInfo = item;
-                itemInfo["quantity"] = cartItems[item._id];
-                orderItems.push(itemInfo)
+    e.preventDefault();
+    let orderItems = [];
+    // Defensive check for food_list and cartItems
+    if (Array.isArray(food_list) && cartItems) {
+        food_list.forEach((item) => {
+            if (item && item._id && cartItems[item._id] > 0) {
+                let itemInfo = { ...item, quantity: cartItems[item._id] };
+                orderItems.push(itemInfo);
             }
-        }))
-        let orderData = {
-            address: data,
-            items: orderItems,
-            amount: getTotalCartAmount() + deliveryCharge,
-        }
-        if (payment === "stripe") {
-            let response = await axios.post(url + "/api/order/place", orderData, { headers: { token } });
-            if (response.data.success) {
-                const { session_url } = response.data;
-                window.location.replace(session_url);
-            }
-            else {
-                toast.error("Something Went Wrong")
-            }
-        }
-        else{
-            let response = await axios.post(url + "/api/order/placecod", orderData, { headers: { token } });
-            if (response.data.success) {
-                navigate("/myorders")
-                toast.success(response.data.message)
-                setCartItems({});
-            }
-            else {
-                toast.error("Something Went Wrong")
-            }
-        }
-
+        });
     }
+    let orderData = {
+        address: data,
+        items: orderItems,
+        amount: getTotalCartAmount() + deliveryCharge,
+    };
+    if (payment === "stripe") {
+        let response = await axios.post(url + "/api/order/place", orderData, { headers: { token } });
+        if (response.data.success) {
+            const { session_url } = response.data;
+            window.location.replace(session_url);
+        } else {
+            toast.error("Something Went Wrong");
+        }
+    } else {
+        let response = await axios.post(url + "/api/order/placecod", orderData, { headers: { token } });
+        if (response.data.success) {
+            navigate("/myorders");
+            toast.success(response.data.message);
+            setCartItems({});
+        } else {
+            toast.error("Something Went Wrong");
+        }
+    }
+}
 
     useEffect(() => {
         if (!token) {
